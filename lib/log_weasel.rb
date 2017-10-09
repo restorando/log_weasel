@@ -1,5 +1,4 @@
 require 'log_weasel/transaction'
-require 'log_weasel/airbrake'
 require 'log_weasel/middleware'
 require 'log_weasel/resque'
 require 'log_weasel/railtie' if defined? ::Rails::Railtie
