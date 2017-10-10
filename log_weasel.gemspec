@@ -17,11 +17,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec')
   s.add_development_dependency('mocha')
-  s.add_development_dependency('resque')
-  s.add_development_dependency('airbrake')
-  s.add_development_dependency('gemfury')
 
-  s.add_dependency('activesupport')
+  s.add_dependency('activesupport', '~> 4.1.1')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
