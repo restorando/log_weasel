@@ -14,17 +14,6 @@ module LogWeasel
 
   def self.configure
     yield self.config
-
-    if defined? ::Airbrake
-      class << ::Airbrake
-        include LogWeasel::Airbrake;
-      end
-    end
-
-    if defined? Resque
-      LogWeasel::Resque.initialize!
-    end
-
   end
 end
 
