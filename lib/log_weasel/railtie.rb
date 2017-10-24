@@ -1,19 +1,10 @@
 require 'rails'
 
 class LogWeasel::Railtie < Rails::Railtie
-  config.log_weasel = LogWeasel.config # Support namespaced configuration in Rails environments
 
   initializer "log_weasel.configure" do |app|
-    LogWeasel.configure do |config|
-      config.key = app.config.log_weasel[:key] || app_name
+    if LogWeasel.config.enabled
+      app.config.middleware.insert_before "::Rails::Rack::Logger", "LogWeasel::Middleware"
     end
-
-    app.config.middleware.insert_before "::Rails::Rack::Logger", "LogWeasel::Middleware"
-  end
-
-  private
-
-  def app_name
-    ::Rails.application.class.to_s.split('::').first
   end
 end
