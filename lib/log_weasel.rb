@@ -4,12 +4,8 @@ require 'log_weasel/railtie' if defined? ::Rails::Railtie
 
 
 module LogWeasel
-  class Config
-    attr_accessor :key
-  end
-
   def self.config
-    @@config ||= Config.new
+    @@config ||= ActiveSupport::OrderedOptions.new
   end
 
   def self.configure

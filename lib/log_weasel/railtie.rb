@@ -1,7 +1,7 @@
 require 'rails'
 
 class LogWeasel::Railtie < Rails::Railtie
-  config.log_weasel = ActiveSupport::OrderedOptions.new # enable namespaced configuration in Rails environments
+  config.log_weasel = LogWeasel.config # Support namespaced configuration in Rails environments
 
   initializer "log_weasel.configure" do |app|
     LogWeasel.configure do |config|
