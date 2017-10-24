@@ -1,0 +1,2 @@
+inherit_gem:
+    no_soup_for_you: .rubocop.yml

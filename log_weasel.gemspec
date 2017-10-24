@@ -13,10 +13,11 @@ Gem::Specification.new do |s|
   s.description = %q{Instrument Rails and Resque with shared transaction IDs so that you trace execution across instances.}
 
   s.rubyforge_project = "log_weasel"
-  
+
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec')
   s.add_development_dependency('mocha')
+  s.add_development_dependency('no_soup_for_you')
 
   s.add_dependency('activesupport', '~> 4.1.1')
 
