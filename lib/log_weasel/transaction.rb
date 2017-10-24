@@ -6,9 +6,8 @@ end
 
 module LogWeasel
   module Transaction
-
-    def self.create(key = nil)
-      Thread.current[:log_weasel_id] = "#{key ? "#{key}-" : ""}#{SecureRandom.hex(10)}"
+    def self.create
+      Thread.current[:log_weasel_id] = (LogWeasel.config.id_generator || default_id_generator).call.to_s
     end
 
     def self.destroy
@@ -22,6 +21,11 @@ module LogWeasel
     def self.id
       Thread.current[:log_weasel_id]
     end
+
+    private
+
+    def default_id_generator
+      SecureRandom.hex(10)
+    end
   end
-  
 end
