@@ -1,0 +1,29 @@
+language: ruby
+sudo: false
+cache:
+  bundler: true
+matrix:
+  include:
+  - rvm: 2.3.1
+    before_script:
+    - gem install danger -v '~> 5.2.1'
+    - danger --verbose
+  - rvm: 2.1.2
+before_install:
+- gem install bundler -v '1.13.6'
+install:
+- bundle install
+script:
+- bundle exec rubocop
+before_deploy:
+- echo "At `before_deploy`, usually the gem is installed to Packagecloud here."
+#- bin/rake build
+#- 'gem install --no-rdoc --no-ri --source "https://f078145cf5a5e217fd38e7cf93706996834356077097c42f:@packagecloud.io:443/restorando/internal/" rt-auto_publisher'
+deploy:
+script: "echo 'At `deploy`, usually the gem is auto-published to Packagecloud here.'"
+#  provider: script
+#  script: "rvm $TRAVIS_RUBY_VERSION do auto_publish restorando internal pkg/*.gem"
+#  skip_cleanup: true
+#  on:
+#    branch: master
+#    ruby: '2.1.2'
