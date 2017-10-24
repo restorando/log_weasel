@@ -1,15 +1,15 @@
 require 'log_weasel/transaction'
 require 'log_weasel/middleware'
 require 'log_weasel/railtie' if defined? ::Rails::Railtie
-
+require 'hashie'
 
 module LogWeasel
   def self.config
-    @@config ||= ActiveSupport::OrderedOptions.new(
+    @@config ||= Hashie::Mash.new(
       # TODO: Document
       enabled: false,
       header_name: 'X_TRANSACTION_ID',
-      id_generator: nil,
+      id_generator: lambda { SecureRandom.hex(10) },
       generate_id_if_missing: true
     )
   end
@@ -18,5 +18,3 @@ module LogWeasel
     yield self.config
   end
 end
-
-#Rails.application.class.to_s.split("::").first
