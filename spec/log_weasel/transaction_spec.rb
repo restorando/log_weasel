@@ -6,7 +6,7 @@ describe LogWeasel::Transaction do
   describe ".id" do
 
     it "is nil if not created" do
-      LogWeasel::Transaction.id.should be_nil
+      expect(LogWeasel::Transaction.id).to be_nil
     end
 
   end
@@ -17,7 +17,7 @@ describe LogWeasel::Transaction do
     end
 
     it "sets the id" do
-      LogWeasel::Transaction.id.should == "1234"
+      expect(LogWeasel::Transaction.id).to eq '1234'
     end
 
   end
@@ -27,15 +27,9 @@ describe LogWeasel::Transaction do
       SecureRandom.stubs(:hex).returns('94b2')
     end
 
-    it 'creates a transaction id with no key' do
+    it 'creates a transaction id' do
       id = LogWeasel::Transaction.create
-      id.should == '94b2'
-    end
-
-    it 'creates a transaction id with a key' do
-      id = LogWeasel::Transaction.create 'KEY'
-      id.should == 'KEY-94b2'
-      LogWeasel::Transaction.id.should == id
+      expect(id).to eq'94b2'
     end
 
   end
@@ -47,7 +41,7 @@ describe LogWeasel::Transaction do
 
     it "removes transaction id" do
       LogWeasel::Transaction.destroy
-      LogWeasel::Transaction.id.should be_nil
+      expect(LogWeasel::Transaction.id). to be_nil
     end
   end
 end
