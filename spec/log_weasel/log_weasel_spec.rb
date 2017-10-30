@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require 'resque'
 require 'log_weasel'
 
 describe LogWeasel do
