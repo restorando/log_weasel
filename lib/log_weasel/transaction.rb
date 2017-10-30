@@ -27,6 +27,7 @@ module LogWeasel
     # @param [Object] id The new transaction ID. If `nil`, and configured to generate IDs when missing, a new
     # ID will be generated.
     # @return [Object] The set or generated transaction ID. `nil` if neither set not generated.
+    # rubocop:disable Style/AccessorMethodName
     def self.set_or_create(id = nil)
       if id.nil?
         create if LogWeasel.config.generate_id_if_missing
@@ -34,5 +35,6 @@ module LogWeasel
         self.id = id
       end
     end
+    # rubocop:enable Style/AccessorMethodName
   end
 end
