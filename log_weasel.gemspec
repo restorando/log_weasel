@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("no_soup_for_you")
 
   s.add_dependency("activesupport", "~> 4.1.1")
-  s.add_dependency("hashie")
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
