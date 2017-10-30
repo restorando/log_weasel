@@ -18,8 +18,21 @@ module LogWeasel
       Thread.current[:log_weasel_id] = id
     end
 
+    # Get transaction ID. `nil` if not present.
     def self.id
       Thread.current[:log_weasel_id]
+    end
+
+    # Set transaction ID, or generate a new one if appropriate.
+    # @param [Object] id The new transaction ID. If `nil`, and configured to generate IDs when missing, a new
+    # ID will be generated.
+    # @return [Object] The set or generated transaction ID. `nil` if neither set not generated.
+    def self.set_or_create(id = nil)
+      if id.nil?
+        create if LogWeasel.config.generate_id_if_missing
+      else
+        self.id = id
+      end
     end
   end
 end
