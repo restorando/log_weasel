@@ -34,7 +34,7 @@ describe LogWeasel::Transaction do
 
     it "creates a transaction id with a key" do
       id = LogWeasel::Transaction.create "KEY"
-      expect(id).to eq  "KEY-94b2"
+      expect(id).to eq "KEY-94b2"
       expect(LogWeasel::Transaction.id).to eq id
     end
 
