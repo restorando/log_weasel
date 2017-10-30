@@ -1,80 +1,52 @@
 # Log Weasel
 
-Instrument Rails and Resque with shared transaction IDs to trace execution of a unit of work across
+Prepend transaction IDs to logs in order to trace execution of a unit of work across
 applications and application instances.
-
-This particularly handy if you're using a system like <a href="http://www.splunk.com">Splunk</a> to manage your log
-files across many applications and application instances.
 
 ## Installation
 
 Add log_weasel to your Gemfile:
 
-<pre>
-gem 'log_weasel'
-</pre>
+```ruby
+gem "schwifty_logger", git: "git@github.com:restorando/schwifty_logger.git", branch: "master"
+```
 
 Use bundler to install it:
 
-<pre>
+```ruby
 bundle install
-</pre>
+```
 
-## Rails 3
+## Usage
 
-For Rails 3, we provide a Railtie that automatically configures and loads Log Weasel.
-
-To see Log Weasel transaction IDs in your Rails logs either use the BufferedLogger provided or
-customize the formatting of your logger to include <code>LogWeasel::Transaction.id</code>.
-
-<pre>
-YourApp::Application.configure do
-  config.log_weasel.key = 'YOUR_APP'    # Optional. Defaults to Rails application name.
-
-  logger = LogWeasel::BufferedLogger.new "#{Rails.root}/log/#{Rails.env}.log"
-  config.logger                   = logger
-  config.action_controller.logger = logger
-  config.active_record.logger     = logger
-end
-</pre>
-
-
-## Other
-
-### Configure
-
-Load and configure Log Weasel with:
-
-<pre>
+1. Configure
+```ruby
 LogWeasel.configure do |config|
-  config.key = "YOUR_APP"
+  config.enabled = true
+  # Any other options, see Configuration section
 end
-</pre>
+```
 
-<code>config.key</code> is a string that will be included in your transaction IDs and is particularly
-useful in an environment where a unit of work may span multiple applications. It is optional but you must call
-<code>LogWeasel.configure</code>.
+2. You're done! We use a Railtie that automatically adds the a Rack middleware if Log Weasel is enabled (see step #1)
 
-### Rack
 
-Log Weasel provides Rack middleware to create and destroy a transaction ID for every HTTP request. You can use it
-in a any web framework that supports Rack (Rails, Sinatra,...) by using <code>LogWeasel::Middleware</code> in your middleware
-stack.
+## Configuration
 
-## Resque
+Valid configuration options are:
 
-When you configure Log Weasel as described above either in Rails or by explicitly calling <code>LogWeasel.configure</code>,
-it modifies Resque to include transaction IDs in all worker logs.
+- `enabled`
+  - Whether Log Weasel is enabled or not. Default is `false`.
+- `header_name`
+  - HTTP header name under which transaction IDs will be read and written. Default is `X_TRANSACTION_ID`.
+- `id_generator`
+  - Block, method or lambda to generate new transaction IDs. Default is `lambda { SecureRandom.hex(10) }`
+- `generate_id_if_missing`
+  - Whether to generate a new transaction ID if no ID is read from HTTP headers. Default is `true`.
 
-Start your Resque worker with <code>VERBOSE=1</code> and you'll see transaction IDs in your Resque logs.
-
-## Airbrake
-
-If you are using <a href="http://airbrake.io/p">Airbrake</a>, Log Weasel will add the parameter
-<code>log_weasel_id</code> to Airbrake errors so that you can track execution through your application stack that
-resulted in the error. No additional configuration required.
 
 ## Example
+
+### TODO, this example is from the original repo and is partially obsolete
 
 In this example we have a Rails app pushing jobs to Resque and a Resque worker that run with the Rails environment loaded.
 
@@ -150,13 +122,8 @@ Units of work initiated from Resque, for example if using a scheduler like
 <a href="https://github.com/bvandenbos/resque-scheduler">resque-scheduler</a>,
 will include 'RESQUE' in the transaction ID to indicate that the work started in Resque.
 
-## Contributing
 
-If you would like to contribute a fix or integrate Log Weasel transaction tracking into another frameworks
-please fork the code, add the fix or feature in your local project and then send a pull request on github.
-Please ensure that you include a test which verifies your changes.
-
-## Authors
+## Original Authors
 
 <a href="http://github.com/asalant">Alon Salant</a> and <a href="http://github.com/brettfishman">Brett Fishman</a>.
 
