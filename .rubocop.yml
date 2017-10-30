@@ -4,3 +4,13 @@ inherit_gem:
 
 inherit_from:
   - .rubocop_todo.yml
+
+# IMPORTANT
+# All the lines below shouldn't be here. There seems to be a bug in RuboCop which prevents 'Exclude'
+# from working correctly when using 'inherit_gem' (https://github.com/bbatsov/rubocop/issues/4154)
+AllCops:
+  DisplayCopNames: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
