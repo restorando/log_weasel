@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require 'active_support'
+require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
+require "active_support"
 
 describe LogWeasel::Transaction do
 
@@ -24,7 +24,7 @@ describe LogWeasel::Transaction do
 
   describe ".create" do
     before do
-      SecureRandom.stubs(:hex).returns('94b2')
+      SecureRandom.stubs(:hex).returns("94b2")
     end
 
     it 'creates a transaction id' do

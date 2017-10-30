@@ -1,0 +1,7 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.1.2
+before_install: gem install bundler -v 1.15.4
+before_script:
+  - bundle exec rubocop -P || travis_terminate 1
