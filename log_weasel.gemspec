@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+
+$LOAD_PATH.push File.expand_path("../lib", __FILE__)
 require "log_weasel/version"
 
 Gem::Specification.new do |s|
@@ -10,19 +11,19 @@ Gem::Specification.new do |s|
   s.email       = ["alon@salant.org"]
   s.homepage    = "http://github.com/carbonfive/log_weasel"
   s.summary     = "log_weasel-#{Log::Weasel::VERSION}"
-  s.description = %q{Instrument Rails and Resque with shared transaction IDs so that you trace execution across instances.}
+  s.description = "Instrument Rails and Resque with shared transaction IDs so that you trace execution across instances."
 
   s.rubyforge_project = "log_weasel"
 
-  s.add_development_dependency('rake')
-  s.add_development_dependency('rspec')
-  s.add_development_dependency('mocha')
-  s.add_development_dependency('no_soup_for_you')
+  s.add_development_dependency("rake")
+  s.add_development_dependency("rspec")
+  s.add_development_dependency("mocha")
+  s.add_development_dependency("no_soup_for_you")
 
-  s.add_dependency('activesupport', '~> 4.1.1')
+  s.add_dependency("activesupport", "~> 4.1.1")
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   s.require_paths = ["lib"]
 end

@@ -1,4 +1,4 @@
-require 'rails'
+require "rails"
 
 class LogWeasel::Railtie < Rails::Railtie
   config.log_weasel = ActiveSupport::OrderedOptions.new # enable namespaced configuration in Rails environments
@@ -14,6 +14,6 @@ class LogWeasel::Railtie < Rails::Railtie
   private
 
   def app_name
-    ::Rails.application.class.to_s.split('::').first
+    ::Rails.application.class.to_s.split("::").first
   end
 end

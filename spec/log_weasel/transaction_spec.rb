@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require 'active_support'
+require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
+require "active_support"
 
 describe LogWeasel::Transaction do
 
@@ -24,17 +24,17 @@ describe LogWeasel::Transaction do
 
   describe ".create" do
     before do
-      SecureRandom.stubs(:hex).returns('94b2')
+      SecureRandom.stubs(:hex).returns("94b2")
     end
 
-    it 'creates a transaction id with no key' do
+    it "creates a transaction id with no key" do
       id = LogWeasel::Transaction.create
-      id.should == '94b2'
+      id.should == "94b2"
     end
 
-    it 'creates a transaction id with a key' do
-      id = LogWeasel::Transaction.create 'KEY'
-      id.should == 'KEY-94b2'
+    it "creates a transaction id with a key" do
+      id = LogWeasel::Transaction.create "KEY"
+      id.should == "KEY-94b2"
       LogWeasel::Transaction.id.should == id
     end
 

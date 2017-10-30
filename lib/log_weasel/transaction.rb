@@ -23,5 +23,5 @@ module LogWeasel
       Thread.current[:log_weasel_id]
     end
   end
-  
+
 end
