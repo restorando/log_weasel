@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require 'log_weasel'
+require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
+require "log_weasel"
 
 describe LogWeasel do
 

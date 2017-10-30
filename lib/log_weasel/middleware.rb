@@ -1,7 +1,7 @@
 class LogWeasel::Middleware
-  KEY_HEADER = 'X_LOGWEASEL_KEY'
+  KEY_HEADER = "X_LOGWEASEL_KEY"
 
-  def initialize(app, options = {})
+  def initialize(app, _options = {})
     @app = app
     @key = LogWeasel.config.key ? "#{LogWeasel.config.key}-WEB" : "WEB"
   end

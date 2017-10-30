@@ -1,7 +1,7 @@
 begin
-  require 'securerandom'
+  require "securerandom"
 rescue
-  require 'active_support/secure_random'
+  require "active_support/secure_random"
 end
 
 module LogWeasel
@@ -23,5 +23,5 @@ module LogWeasel
       Thread.current[:log_weasel_id]
     end
   end
-  
+
 end
